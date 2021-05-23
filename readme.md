@@ -1,4 +1,4 @@
-## Installing iSeries Access ODBC Driver (64bit) for PHP7 on Ubuntu
+## Installing iSeries Access ODBC Driver (64bit) for PHP7 on Ubuntu/Debian
 
 > Prerequisites: You've got to have PHP7.X installed and running; this isn’t part of the tutorial.
 
