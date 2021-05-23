@@ -45,7 +45,7 @@ Than restart your Apache server:
 sudo service apache2 restart
 ```
 #### Step 4 – Create the DSN
-Create an **odbc.ini **file
+Create an **odbc.ini** file
 ```sh
 sudo nano /etc/odbc.ini
 ```
@@ -61,7 +61,7 @@ Naming = 1
 DefaultLibraries = *myLIB*
 Database = *myDATABASE*
 ```
-**odbc.ini ** details
+**odbc.ini** details
 - *https://www.ibm.com/docs/en/i/7.3?topic=details-connection-string-keywords*
 
 a PHP test script
