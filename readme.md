@@ -66,6 +66,7 @@ Database = *myDATABASE*
 
 a PHP test script
 
+```php
     <?php
        // odbc.php
 		try {
@@ -81,6 +82,7 @@ a PHP test script
 			echo $e->getMessage();
 		}
     ?>
+```
     
 Then:
 ```sh
