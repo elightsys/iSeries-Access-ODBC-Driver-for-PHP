@@ -2,7 +2,7 @@
 
 > Prerequisites: You've got to have PHP7.X installed and running; this isn’t part of the tutorial.
 
-> I used Ubuntu 15.XX LTS.*
+> I used Ubuntu 15.XX LTS.
 
 ### How to I do install DB2 ODBC?
 
@@ -18,7 +18,7 @@ sudo apt-get install php7.x-odbc alien
 #### Step 2 – Download the RPM
 
 You have to registry on the IBM page.
-- *https://www.ibm.com/*
+- *https://www.ibm.com/
 
 Than you have to use IBM i Access for Linux V7R1, and then the “For Intel-based Linux workstations"
 - https://www14.software.ibm.com/webapp/iwm/web/preLogin.do?source=ial
