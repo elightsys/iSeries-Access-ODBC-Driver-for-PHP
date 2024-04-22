@@ -1,42 +1,45 @@
-## Installing iSeries Access ODBC Driver (64bit) for PHP7 on Ubuntu/Debian
+## Installing iSeries Access ODBC Driver (64bit) for PHP8 on Ubuntu/Debian
 
-> Prerequisites: You've got to have PHP7.X installed and running; this isn’t part of the tutorial.
+> Prerequisites: You must have PHP 8.1.X installed and running; this is not covered in this tutorial.
 
-> I used Ubuntu 15.XX LTS.
+> Tested Environment: Ubuntu 20.04.6 LTS.
 
-### How to I do install DB2 ODBC?
+### How do I install the DB2 ODBC Driver?
 
 #### Step 1 – Install PHP ODBC and Alien
-This is the first of the many (seriously, there aren’t THAT many steps) steps to get it running. Get into BASH and then run
+This step is the beginning of a few straightforward steps to get everything up and running. Open your terminal and run:
 
 ```sh
-# Example: php7.2-odbc
-sudo apt-get install php7.x-odbc alien
+sudo apt update
+
+# Example:
+sudo apt install php8.1-odbc alien
 ```
-> We’re installing alien because IBM provide a “Linux compatible” version of the iSeries Access ODBC Driver
+> Note: We are installing 'alien' because IBM provides a "Linux compatible" version of the iSeries Access ODBC Driver.
 
 #### Step 2 – Download the RPM
 
-You have to registry on the IBM page.
-- *https://www.ibm.com/
+You need to register on the IBM website.
+- IBM Website: [IBM Registration Page](https://www.ibm.com/)
 
-Than you have to use IBM i Access for Linux V7R1, and then the “For Intel-based Linux workstations"
-- https://www14.software.ibm.com/webapp/iwm/web/preLogin.do?source=ial
+Then download "IBM i Access for Linux V7R1" for "Intel-based Linux workstations".
+
+- Download Link: [IBM i Access V7R1](https://www14.software.ibm.com/webapp/iwm/web/preLogin.do?source=ial)
 
 #### Step 3 – Convert and install the RPM
-Run this
+First, install the necessary ODBC installer:
 ```sh
-sudo apt-get install odbcinst
+sudo apt install odbcinst
 ```
-Create a DIR (64bit)
+Create a directory for 64-bit libraries:
 ```sh
 sudo mkdir /usr/lib64
 ```
-Upload the **iSeriesAccess-7.1.0-1.0.x86_64.rpm** to your server and run this.
+Upload the **iSeriesAccess-7.1.0-1.0.x86_64.rpm** to your server and run:
 ```sh
 sudo alien -i -c iSeriesAccess-7.1.0-1.0.x86_64.rpm
 ```
-CREATE mySymLink
+Create a symbolic link to make the missing parts of the ODBC driver library available:
 ```sh
 sudo ln -s /usr/lib64/libcw* /usr/lib
 ```
@@ -49,7 +52,7 @@ Create an **odbc.ini** file
 ```sh
 sudo nano /etc/odbc.ini
 ```
-I set up the /etc/odbc.ini file thusly
+Configure the **/etc/odbc.ini** file as follows:
 ```sh
 [myDBdev]
 Description = iSeries Access ODBC Driver DSN for iSeries
@@ -61,22 +64,23 @@ Naming = 1
 DefaultLibraries = *myLIB*
 Database = *myDATABASE*
 ```
-**odbc.ini** details
-- *https://www.ibm.com/docs/en/i/7.3?topic=details-connection-string-keywords*
+**odbc.ini** details:
+- Connection String Keywords: [IBM Documentation on Connection String Keywords](https://www.ibm.com/docs/en/i/7.3?topic=details-connection-string-keywords)
 
-a PHP test script
+**Testing with a PHP Script**
+
+Here’s a PHP script to test your setup:
 
 ```php
 <?php
-	// odbc.php
+	// example odbc.php
 	try {
-		$conn = new PDO('odbc:myDBdev');
-		// The name is the same as what's in our square brackets in ODBC.ini
+		$conn = new PDO('odbc:myDBdev'); // The name matches what's in the ODBC.ini file
 		$stmt = $conn->prepare("SELECT * FROM myTable WHERE id = :id");
 		$stmt->execute(array('id' => 123));
 		while ($row = $stmt->fetch()) {
 			print_r($row);
-			echo '';
+			echo PHP_EOL;  // Improved line break for clarity
 		}
 	} catch (PDOException $e) {
 		echo $e->getMessage();
@@ -84,7 +88,7 @@ a PHP test script
 ?>
 ```
     
-Then:
+- <i>Example output:</i>
 ```sh
 Array(
 [ID] => 123,
