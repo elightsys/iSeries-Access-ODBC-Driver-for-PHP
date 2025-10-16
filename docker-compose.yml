@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  php:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/html
+      - ./odbc.ini:/etc/odbc.ini:ro
+    restart: unless-stopped
