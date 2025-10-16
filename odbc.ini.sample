@@ -1,0 +1,10 @@
+[MYIBMI]
+Description=IBM i Access ODBC Driver (Example DSN)
+Driver=IBM i Access ODBC Driver
+System=YOUR_IBMI_HOST_OR_IP
+UserID=YOUR_USERNAME
+Password=YOUR_PASSWORD
+Naming=1
+DefaultLibraries=YOURLIB
+Database=YOURDB
+CCSID=1208
