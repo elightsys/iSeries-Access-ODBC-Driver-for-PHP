@@ -1,0 +1,28 @@
+name: Bug report
+description: File a bug report
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear and concise description of the issue.
+      placeholder: Describe the error and expected behavior.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS and version
+      placeholder: Debian 12 / Ubuntu 22.04 ...
+  - type: input
+    id: php
+    attributes:
+      label: PHP version
+      placeholder: 8.1 / 8.2
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / output
+      description: Paste any relevant output (redact secrets).
+      render: shell
